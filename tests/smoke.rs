@@ -61,9 +61,7 @@ fn output_to_file() {
 }
 
 fn tempdir() -> std::path::PathBuf {
-    let base =
-        std::env::var("TMPDIR").unwrap_or_else(|_| "/Volumes/KIOXIA/Developments/tmp".to_string());
-    let d = std::path::PathBuf::from(base).join(format!("seq-dist-smoke-{}", std::process::id()));
+    let d = std::env::temp_dir().join(format!("seq-dist-smoke-{}", std::process::id()));
     std::fs::create_dir_all(&d).unwrap();
     d
 }
