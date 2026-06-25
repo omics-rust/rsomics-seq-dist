@@ -1,0 +1,36 @@
+[package]
+name = "rsomics-seq-dist"
+version = "0.1.0"
+edition = "2024"
+description = "Pairwise nucleotide-sequence distances (Hamming, JC69, K2P) from an aligned FASTA — value-exact to scikit-bio, emits a distance-matrix TSV"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/omics-rust/rsomics-seq-dist"
+readme = "README.md"
+keywords = ["bioinformatics", "phylogenetics", "distance", "jukes-cantor", "kimura"]
+categories = ["science", "command-line-utilities"]
+
+[[bin]]
+name = "rsomics-seq-dist"
+path = "src/main.rs"
+
+[lib]
+name = "rsomics_seq_dist"
+path = "src/lib.rs"
+doctest = false
+
+[dependencies]
+rsomics-common = { version = "0.6", features = ["rayon"] }
+clap = { version = "4", features = ["derive"] }
+rayon = "1"
+wide = "0.7"
+
+[dev-dependencies]
+criterion = { version = "0.7", default-features = false, features = ["cargo_bench_support"] }
+
+[[bench]]
+name = "bench"
+harness = false
+
+[profile.release]
+lto = true
+codegen-units = 1
